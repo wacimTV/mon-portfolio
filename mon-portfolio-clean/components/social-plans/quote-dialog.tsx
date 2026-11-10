@@ -78,6 +78,7 @@ export function QuoteDialog({ open, onOpenChange, formula, onFormulaChange }: Pr
           name: values.name,
           email: values.email,
           subject: `Devis réseaux sociaux – ${formulaLabel[formula]}`,
+          projectType: "Community management",
           message: [
             `Entreprise : ${values.company}`,
             `Formule souhaitée : ${formulaLabel[formula]}`,
