@@ -83,9 +83,9 @@ export function Navigation() {
               size="icon"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="ml-4"
+              aria-label="Changer de thème (clair / sombre)"
             >
               {mounted && (theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />)}
-              <span className="sr-only">Toggle theme</span>
             </Button>
           </motion.div>
 
@@ -98,10 +98,22 @@ export function Navigation() {
             >
               Community Mgmt
             </a>
-            <Button variant="ghost" size="icon" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              aria-label="Changer de thème (clair / sombre)"
+            >
               {mounted && (theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />)}
             </Button>
-            <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)}>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
+            >
               {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
@@ -109,6 +121,7 @@ export function Navigation() {
 
         {/* Mobile Menu */}
         <motion.div
+          id="mobile-menu"
           className="fixed inset-0 z-40 bg-background md:hidden"
           initial={false}
           animate={{
