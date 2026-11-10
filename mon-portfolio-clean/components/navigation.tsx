@@ -47,9 +47,9 @@ export function Navigation() {
           <motion.a
             href="/"
             className="relative z-10 font-serif text-2xl font-medium tracking-tight"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={{ x: -8 }}
+            animate={{ x: 0 }}
+            transition={{ duration: 0.4 }}
           >
             WA
           </motion.a>
@@ -57,9 +57,9 @@ export function Navigation() {
           {/* Desktop Navigation */}
           <motion.div
             className="hidden items-center gap-8 md:flex"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial={{ y: -6 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.4 }}
           >
             {navItems.map((item, i) => (
               <motion.a
@@ -70,9 +70,9 @@ export function Navigation() {
                     ? "text-sm font-medium text-accent transition-colors hover:text-foreground"
                     : "text-sm text-muted-foreground transition-colors hover:text-foreground"
                 }
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.1 * i }}
+                initial={{ y: -6 }}
+                animate={{ y: 0 }}
+                transition={{ duration: 0.3, delay: 0.03 * i }}
               >
                 {item.name}
               </motion.a>

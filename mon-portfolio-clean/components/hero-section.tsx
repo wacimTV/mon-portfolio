@@ -22,9 +22,9 @@ export function HeroSection() {
 
       <motion.div className="relative z-10 mx-auto max-w-5xl text-center" style={{ y, opacity }}>
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.5 }}
+          initial={{ y: 8 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.5, delay: 0 }}
           className="mb-4"
         >
           <p className="text-sm font-medium uppercase tracking-widest text-accent">
@@ -34,36 +34,36 @@ export function HeroSection() {
 
         <motion.h1
           className="mb-3 font-serif text-4xl font-medium leading-[1.15] tracking-tight sm:text-5xl md:text-6xl"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.7 }}
+          initial={{ y: 8 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.5, delay: 0 }}
         >
           Développeur web & Community Manager à Marseille
         </motion.h1>
 
         <motion.p
           className="mb-6 text-gradient font-serif text-xl font-medium sm:text-2xl"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.8 }}
+          initial={{ y: 8 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.5, delay: 0.05 }}
         >
           Création de sites internet et gestion de réseaux sociaux
         </motion.p>
 
         <motion.p
           className="mx-auto mb-6 max-w-2xl text-lg text-muted-foreground md:text-xl"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.9 }}
+          initial={{ y: 8 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
         >
           Je crée des sites rapides et bien référencés, et je gère l&apos;Instagram et le TikTok des commerces, restaurants et indépendants. Basé à Marseille, je me déplace dans tout le 13 et je travaille aussi à distance, en visio, à l&apos;international. Devis gratuit sous 24h.
         </motion.p>
 
         <motion.div
           className="mb-10 flex flex-wrap items-center justify-center gap-3"
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 2.0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
         >
           <span className="flex items-center gap-2 rounded-full border border-border bg-card/50 px-4 py-1.5 text-xs sm:text-sm text-muted-foreground">
             <MapPin className="h-3.5 w-3.5 text-accent" />
@@ -77,9 +77,9 @@ export function HeroSection() {
 
         <motion.div
           className="flex flex-col items-center justify-center gap-4 sm:flex-row"
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 2.1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
           <Button size="lg" className="px-8" asChild>
             <a href="#contact">Demander un devis gratuit</a>
@@ -95,7 +95,7 @@ export function HeroSection() {
           className="mt-16 flex items-center justify-center gap-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 2.3 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
         >
           {[
             { icon: Linkedin, href: "https://www.linkedin.com/in/wacim-ammouche-4a20031b1/", label: "LinkedIn" },
@@ -121,7 +121,7 @@ export function HeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{
           duration: 0.8,
-          delay: 2.5,
+          delay: 0.3,
           repeat: Number.POSITIVE_INFINITY,
           repeatType: "reverse",
           repeatDelay: 1,
