@@ -1,8 +1,9 @@
 import type React from "react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/theme-provider";
+import { MobileContactBar } from "@/components/mobile-contact-bar";
 import { DEFAULT_OG_IMAGE } from "@/lib/seo";
 import "./globals.css";
 
@@ -19,6 +20,13 @@ const geistMono = Geist_Mono({
 });
 
 const siteUrl = "https://www.wacimammouche.fr";
+
+// viewport-fit=cover : nécessaire pour que env(safe-area-inset-bottom) fonctionne sur iOS
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -206,6 +214,7 @@ export default function RootLayout({
           disableTransitionOnChange={false}
         >
           {children}
+          <MobileContactBar />
         </ThemeProvider>
         <Analytics />
       </body>

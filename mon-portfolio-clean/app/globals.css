@@ -125,6 +125,14 @@
   }
 }
 
+/* Barre de contact mobile fixe (components/mobile-contact-bar.tsx) :
+   réserve sa hauteur en bas de page pour ne pas masquer le pied de page */
+@media (max-width: 767.98px) {
+  body {
+    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
