@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import { Resend } from "resend"
 import { rateLimit, getClientIp } from "@/lib/rate-limit"
 import { verifyTurnstile } from "@/lib/turnstile"
-import { isBudget, isProjectType } from "@/lib/contact-options"
+import { isProjectType } from "@/lib/contact-options"
 
 // 10 envois max par heure et par IP
 const RATE_LIMIT = 10
@@ -74,16 +74,11 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Adresse email invalide." }, { status: 400 })
     }
 
-    // Menus déroulants : seules les valeurs de la liste autorisée sont acceptées
+    // Menu déroulant : seules les valeurs de la liste autorisée sont acceptées
     if (!isProjectType(body.projectType)) {
       return NextResponse.json({ error: "Type de projet invalide." }, { status: 400 })
     }
-    const rawBudget = body.budget ?? ""
-    if (rawBudget !== "" && !isBudget(rawBudget)) {
-      return NextResponse.json({ error: "Budget invalide." }, { status: 400 })
-    }
     const projectType = escapeHtml(body.projectType)
-    const budget = rawBudget === "" ? "Non précisé" : escapeHtml(rawBudget)
 
     const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -114,10 +109,6 @@ export async function POST(req: Request) {
             <tr>
               <td style="padding: 8px 0; color: #6b7280; font-weight: 600;">Projet</td>
               <td style="padding: 8px 0; color: #111827;">${projectType}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; color: #6b7280; font-weight: 600;">Budget</td>
-              <td style="padding: 8px 0; color: #111827;">${budget}</td>
             </tr>
           </table>
           

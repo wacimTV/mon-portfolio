@@ -23,7 +23,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { TurnstileWidget, TURNSTILE_SITE_KEY, type TurnstileHandle } from "@/components/turnstile-widget"
-import { PROJECT_TYPES, BUDGETS } from "@/lib/contact-options"
+import { PROJECT_TYPES } from "@/lib/contact-options"
 
 // ─── FAQ Data ────────────────────────────────────────────────────────────────
 const faqItems = [
@@ -135,7 +135,6 @@ export function ContactSection() {
       email: (form.elements.namedItem("email") as HTMLInputElement).value,
       subject: (form.elements.namedItem("subject") as HTMLInputElement).value,
       projectType: (form.elements.namedItem("projectType") as HTMLSelectElement).value,
-      budget: (form.elements.namedItem("budget") as HTMLSelectElement).value,
       message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
       website: (form.elements.namedItem("website") as HTMLInputElement).value,
       startedAt: startedAt.current,
@@ -365,45 +364,25 @@ export function ContactSection() {
                     </div>
                   </div>
 
-                  {/* Type de projet + Budget */}
-                  <div className="grid gap-5 sm:grid-cols-2">
-                    <div className="space-y-2">
-                      <Label htmlFor="projectType">Type de projet</Label>
-                      <select
-                        id="projectType"
-                        name="projectType"
-                        required
-                        defaultValue=""
-                        className="border-input h-9 w-full min-w-0 rounded-md border bg-background px-3 py-1 text-base shadow-xs outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 md:text-sm"
-                      >
-                        <option value="" disabled>
-                          Choisir…
+                  {/* Type de projet */}
+                  <div className="space-y-2">
+                    <Label htmlFor="projectType">Type de projet</Label>
+                    <select
+                      id="projectType"
+                      name="projectType"
+                      required
+                      defaultValue=""
+                      className="border-input h-9 w-full min-w-0 rounded-md border bg-background px-3 py-1 text-base shadow-xs outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 md:text-sm"
+                    >
+                      <option value="" disabled>
+                        Choisir…
+                      </option>
+                      {PROJECT_TYPES.map((t) => (
+                        <option key={t} value={t}>
+                          {t}
                         </option>
-                        {PROJECT_TYPES.map((t) => (
-                          <option key={t} value={t}>
-                            {t}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="budget">
-                        Budget <span className="font-normal text-muted-foreground">(facultatif)</span>
-                      </Label>
-                      <select
-                        id="budget"
-                        name="budget"
-                        defaultValue=""
-                        className="border-input h-9 w-full min-w-0 rounded-md border bg-background px-3 py-1 text-base shadow-xs outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 md:text-sm"
-                      >
-                        <option value="">Non précisé</option>
-                        {BUDGETS.map((b) => (
-                          <option key={b} value={b}>
-                            {b}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
+                      ))}
+                    </select>
                   </div>
 
                   {/* Subject */}
