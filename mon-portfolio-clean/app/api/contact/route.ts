@@ -1,5 +1,16 @@
 import { NextResponse } from "next/server"
 import { Resend } from "resend"
+import { rateLimit, getClientIp } from "@/lib/rate-limit"
+import { verifyTurnstile } from "@/lib/turnstile"
+
+// 3 envois max par heure et par IP
+const RATE_LIMIT = 3
+const RATE_WINDOW_SECONDS = 60 * 60
+// Un humain met plus de 3 secondes à remplir le formulaire
+const MIN_FILL_TIME_MS = 3000
+
+const MAX_LENGTHS = { name: 100, email: 254, subject: 200, message: 5000 }
+const EMAIL_RE = /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/
 
 const escapeHtml = (s: string) =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;")
@@ -9,8 +20,36 @@ export async function POST(req: Request) {
     if (!process.env.RESEND_API_KEY) {
       return NextResponse.json({ error: "Configuration email manquante." }, { status: 500 })
     }
-    const resend = new Resend(process.env.RESEND_API_KEY)
     const body = await req.json()
+
+    // 1. Honeypot : champ invisible pour les humains. S'il est rempli (ou si le formulaire
+    //    est envoyé trop vite), c'est un robot. On renvoie un faux succès pour ne pas
+    //    lui indiquer qu'il a été détecté.
+    const filledTooFast =
+      typeof body.startedAt === "number" && Date.now() - body.startedAt < MIN_FILL_TIME_MS
+    if ((typeof body.website === "string" && body.website.trim() !== "") || filledTooFast) {
+      return NextResponse.json({ success: true })
+    }
+
+    // 2. Limitation de débit par IP
+    const ip = getClientIp(req)
+    const { allowed } = await rateLimit(`contact:${ip}`, RATE_LIMIT, RATE_WINDOW_SECONDS)
+    if (!allowed) {
+      return NextResponse.json(
+        { error: "Trop de messages envoyés. Merci de réessayer dans une heure ou de me contacter par téléphone." },
+        { status: 429, headers: { "Retry-After": String(RATE_WINDOW_SECONDS) } },
+      )
+    }
+
+    // 3. Cloudflare Turnstile (actif seulement si TURNSTILE_SECRET_KEY est défini)
+    const captchaOk = await verifyTurnstile(String(body.turnstileToken ?? ""), ip)
+    if (!captchaOk) {
+      return NextResponse.json(
+        { error: "La vérification anti-robot a échoué. Merci de réessayer." },
+        { status: 400 },
+      )
+    }
+
     const { subject: rawSubject, message: rawMessage } = body
     const name = escapeHtml(body.name ?? "")
     const email = escapeHtml(body.email ?? "")
@@ -20,6 +59,21 @@ export async function POST(req: Request) {
     if (!name || !email || !subject || !message) {
       return NextResponse.json({ error: "Tous les champs sont requis." }, { status: 400 })
     }
+
+    if (
+      String(body.name).length > MAX_LENGTHS.name ||
+      String(body.email).length > MAX_LENGTHS.email ||
+      String(rawSubject).length > MAX_LENGTHS.subject ||
+      String(rawMessage).length > MAX_LENGTHS.message
+    ) {
+      return NextResponse.json({ error: "Un des champs est trop long." }, { status: 400 })
+    }
+
+    if (!EMAIL_RE.test(String(body.email))) {
+      return NextResponse.json({ error: "Adresse email invalide." }, { status: 400 })
+    }
+
+    const resend = new Resend(process.env.RESEND_API_KEY)
 
     const { error } = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",

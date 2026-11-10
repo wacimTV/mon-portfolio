@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
+import { TurnstileWidget, TURNSTILE_SITE_KEY, type TurnstileHandle } from "@/components/turnstile-widget"
 
 // ─── FAQ Data ────────────────────────────────────────────────────────────────
 const faqItems = [
@@ -111,9 +112,19 @@ export function ContactSection() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [turnstileToken, setTurnstileToken] = useState("")
+  const turnstileRef = useRef<TurnstileHandle>(null)
+  // Moment où le formulaire est affiché (les robots l'envoient instantanément)
+  const startedAt = useRef<number>(Date.now())
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    if (TURNSTILE_SITE_KEY && !turnstileToken) {
+      setError("Merci de patienter pendant la vérification anti-robot.")
+      return
+    }
+
     setIsLoading(true)
     setError(null)
 
@@ -123,6 +134,9 @@ export function ContactSection() {
       email: (form.elements.namedItem("email") as HTMLInputElement).value,
       subject: (form.elements.namedItem("subject") as HTMLInputElement).value,
       message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+      website: (form.elements.namedItem("website") as HTMLInputElement).value,
+      startedAt: startedAt.current,
+      turnstileToken,
     }
 
     try {
@@ -140,6 +154,8 @@ export function ContactSection() {
       setIsSubmitted(true)
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Une erreur est survenue. Veuillez réessayer.")
+      // Un jeton Turnstile n'est valable qu'une fois : on en redemande un
+      turnstileRef.current?.reset()
     } finally {
       setIsLoading(false)
     }
@@ -370,6 +386,18 @@ export function ContactSection() {
                       className="resize-none bg-background transition-shadow focus:shadow-[0_0_0_3px_hsl(var(--accent)/0.15)]"
                     />
                   </div>
+
+                  {/* Honeypot anti-robot : invisible pour les humains, ne pas supprimer */}
+                  <div
+                    aria-hidden="true"
+                    style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}
+                  >
+                    <label htmlFor="website">Ne pas remplir ce champ</label>
+                    <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" defaultValue="" />
+                  </div>
+
+                  {/* Cloudflare Turnstile (si NEXT_PUBLIC_TURNSTILE_SITE_KEY est défini) */}
+                  <TurnstileWidget ref={turnstileRef} onToken={setTurnstileToken} />
 
                   {/* CTA */}
                   <Button
