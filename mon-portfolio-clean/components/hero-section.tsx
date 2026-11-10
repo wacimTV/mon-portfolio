@@ -17,7 +17,7 @@ export function HeroSection() {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
 
   return (
-    <section ref={ref} id="hero" aria-label="Présentation" className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
+    <section ref={ref} id="hero" aria-label="Présentation" className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-24 pb-28 md:py-24">
       <ParticleField />
 
       <motion.div className="relative z-10 mx-auto max-w-5xl text-center" style={{ y, opacity }}>
