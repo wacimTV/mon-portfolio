@@ -4,10 +4,25 @@ import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 
 export const metadata: Metadata = {
-  title: "Mentions Légales | Wacim Ammouche",
+  title: "Mentions légales",
   description:
-    "Mentions légales du site de Wacim Ammouche, développeur web freelance et community manager à Marseille.",
+    "Mentions légales du site de Wacim Ammouche, développeur web freelance et community manager à Marseille. Une question ? Devis gratuit sous 24h.",
   alternates: { canonical: "https://www.wacimammouche.fr/mentions-legales" },
+  openGraph: {
+    title: "Mentions légales | Wacim Ammouche",
+    description:
+      "Mentions légales du site de Wacim Ammouche, développeur web freelance et community manager à Marseille. Une question ? Devis gratuit sous 24h.",
+    type: "website",
+    locale: "fr_FR",
+    url: "https://www.wacimammouche.fr/mentions-legales",
+    siteName: "Wacim Ammouche",
+  },
+  twitter: {
+    card: "summary",
+    title: "Mentions légales | Wacim Ammouche",
+    description:
+      "Mentions légales du site de Wacim Ammouche, développeur web freelance et community manager à Marseille. Une question ? Devis gratuit sous 24h.",
+  },
   robots: {
     index: true,
     follow: true,

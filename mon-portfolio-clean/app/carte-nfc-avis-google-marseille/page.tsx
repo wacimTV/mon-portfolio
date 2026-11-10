@@ -16,14 +16,16 @@ import { Button } from "@/components/ui/button"
 import { DEFAULT_OG_IMAGE } from "@/lib/seo"
 
 export const metadata: Metadata = {
-  title: "Carte NFC Avis Google à Marseille | Dès 50 € TTC",
+  title: {
+    absolute: "Carte NFC avis Google à Marseille | Dès 50 € TTC",
+  },
   description:
-    "Cartes NFC et plaques QR Code connectées pour booster vos avis Google dès 50 € TTC. Simple, rapide et sans abonnement pour commerces et restaurants. Devis gratuit.",
+    "Cartes NFC et QR code pour récolter plus d'avis Google, dès 50 € TTC et sans abonnement. Pour commerces et restaurants à Marseille. Devis gratuit sous 24h.",
   alternates: { canonical: "https://www.wacimammouche.fr/carte-nfc-avis-google-marseille" },
   openGraph: {
-    title: "Carte NFC & Plaques Connectées Avis Google à Marseille | Dès 50 €",
+    title: "Carte NFC avis Google à Marseille | Dès 50 € TTC",
     description:
-      "Aidez vos clients satisfaits à déposer un avis Google 5 étoiles en un seul geste sans contact dès 50 € TTC.",
+      "Cartes NFC et QR code pour récolter plus d'avis Google, dès 50 € TTC et sans abonnement. Pour commerces et restaurants à Marseille. Devis gratuit sous 24h.",
     type: "website",
     locale: "fr_FR",
     url: "https://www.wacimammouche.fr/carte-nfc-avis-google-marseille",
@@ -38,9 +40,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Carte NFC Avis Google à Marseille | Dès 50 € TTC",
+    title: "Carte NFC avis Google à Marseille | Dès 50 € TTC",
     description:
-      "Boostez votre réputation locale sur Google Maps avec mes cartes NFC sans contact dès 50 € TTC. Solution sans abonnement.",
+      "Cartes NFC et QR code pour récolter plus d'avis Google, dès 50 € TTC et sans abonnement. Pour commerces et restaurants à Marseille. Devis gratuit sous 24h.",
     images: [DEFAULT_OG_IMAGE.url],
   },
 }

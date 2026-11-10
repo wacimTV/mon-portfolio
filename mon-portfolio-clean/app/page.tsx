@@ -10,16 +10,18 @@ import { Footer } from "@/components/footer"
 import { DEFAULT_OG_IMAGE } from "@/lib/seo"
 
 export const metadata: Metadata = {
-  title: "Développeur Web & Community Manager à Marseille | Wacim Ammouche",
+  title: {
+    absolute: "Développeur Web & Community Manager à Marseille",
+  },
   description:
-    "Développeur web & community manager à Marseille. Sites internet, e-commerce, réseaux sociaux : sur place dans le 13 ou en visio à l'international. Devis gratuit.",
+    "Développeur web & community manager à Marseille : sites internet, e-commerce et réseaux sociaux, sur place dans le 13 ou en visio. Devis gratuit sous 24h.",
   alternates: {
     canonical: "https://www.wacimammouche.fr",
   },
   openGraph: {
-    title: "Développeur Web & Community Manager à Marseille | Wacim Ammouche",
+    title: "Développeur Web & Community Manager à Marseille",
     description:
-      "Développeur web & community manager à Marseille. Sites internet, e-commerce, réseaux sociaux : sur place dans le 13 ou en visio à l'international. Devis gratuit.",
+      "Développeur web & community manager à Marseille : sites internet, e-commerce et réseaux sociaux, sur place dans le 13 ou en visio. Devis gratuit sous 24h.",
     type: "website",
     locale: "fr_FR",
     url: "https://www.wacimammouche.fr",
@@ -35,9 +37,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Développeur Web & Community Manager à Marseille | Wacim Ammouche",
+    title: "Développeur Web & Community Manager à Marseille",
     description:
-      "Développeur web & community manager à Marseille. Sites internet, e-commerce, réseaux sociaux : sur place dans le 13 ou en visio à l'international. Devis gratuit.",
+      "Développeur web & community manager à Marseille : sites internet, e-commerce et réseaux sociaux, sur place dans le 13 ou en visio. Devis gratuit sous 24h.",
     images: [DEFAULT_OG_IMAGE.url],
   },
 }

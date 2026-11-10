@@ -22,19 +22,17 @@ import { DEFAULT_OG_IMAGE } from "@/lib/seo"
 
 export const metadata: Metadata = {
   title: {
-    absolute:
-      "Création de site internet à Marseille | Développeur web freelance",
+    absolute: "Création de site internet à Marseille | Développeur web",
   },
   description:
-    "Création de sites vitrines, e-commerce et applications web à Marseille. Développeur web freelance, sites rapides et bien référencés. Devis gratuit sous 24h.",
+    "Création de sites vitrines, e-commerce et applications web à Marseille. Sites rapides et bien référencés par un freelance local. Devis gratuit sous 24h.",
   alternates: {
     canonical: "https://www.wacimammouche.fr/developpeur-web-marseille",
   },
   openGraph: {
-    title:
-      "Création de site internet à Marseille | Développeur web freelance",
+    title: "Création de site internet à Marseille | Développeur web",
     description:
-      "Création de sites vitrines, e-commerce et applications web à Marseille. Développeur web freelance, sites rapides et bien référencés. Devis gratuit sous 24h.",
+      "Création de sites vitrines, e-commerce et applications web à Marseille. Sites rapides et bien référencés par un freelance local. Devis gratuit sous 24h.",
     type: "website",
     locale: "fr_FR",
     url: "https://www.wacimammouche.fr/developpeur-web-marseille",
@@ -49,10 +47,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Création de site internet à Marseille | Développeur web freelance",
+    title: "Création de site internet à Marseille | Développeur web",
     description:
-      "Création de sites vitrines, e-commerce et applications web à Marseille. Développeur web freelance, sites rapides et bien référencés. Devis gratuit sous 24h.",
+      "Création de sites vitrines, e-commerce et applications web à Marseille. Sites rapides et bien référencés par un freelance local. Devis gratuit sous 24h.",
     images: [DEFAULT_OG_IMAGE.url],
   },
 }

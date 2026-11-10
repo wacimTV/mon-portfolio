@@ -31,21 +31,20 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default:
-      "Développeur Web & Community Manager à Marseille | Wacim Ammouche",
+    default: "Développeur Web & Community Manager à Marseille",
     template: "%s | Wacim Ammouche",
   },
   description:
-    "Développeur web & community manager à Marseille. Sites internet, e-commerce, réseaux sociaux : sur place dans le 13 ou en visio à l'international. Devis gratuit.",
+    "Développeur web & community manager à Marseille : sites internet, e-commerce et réseaux sociaux, sur place dans le 13 ou en visio. Devis gratuit sous 24h.",
   authors: [{ name: "Wacim Ammouche", url: siteUrl }],
   creator: "Wacim Ammouche",
   alternates: {
     canonical: siteUrl,
   },
   openGraph: {
-    title: "Développeur Web & Community Manager à Marseille | Wacim Ammouche",
+    title: "Développeur Web & Community Manager à Marseille",
     description:
-      "Développeur web & community manager à Marseille. Sites internet, e-commerce, réseaux sociaux : sur place dans le 13 ou en visio à l'international. Devis gratuit.",
+      "Développeur web & community manager à Marseille : sites internet, e-commerce et réseaux sociaux, sur place dans le 13 ou en visio. Devis gratuit sous 24h.",
     type: "website",
     locale: "fr_FR",
     url: siteUrl,
@@ -61,9 +60,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Développeur Web & Community Manager à Marseille | Wacim Ammouche",
+    title: "Développeur Web & Community Manager à Marseille",
     description:
-      "Développeur web & community manager à Marseille. Sites internet, e-commerce, réseaux sociaux : sur place dans le 13 ou en visio à l'international. Devis gratuit.",
+      "Développeur web & community manager à Marseille : sites internet, e-commerce et réseaux sociaux, sur place dans le 13 ou en visio. Devis gratuit sous 24h.",
     images: [DEFAULT_OG_IMAGE.url],
   },
   robots: {

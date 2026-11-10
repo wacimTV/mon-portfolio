@@ -18,14 +18,16 @@ import { Button } from "@/components/ui/button"
 import { DEFAULT_OG_IMAGE } from "@/lib/seo"
 
 export const metadata: Metadata = {
-  title: "Refonte de Site Internet à Marseille | Modernisation & SEO Local",
+  title: {
+    absolute: "Refonte de site internet à Marseille | Design & SEO local",
+  },
   description:
-    "Donnez un nouveau souffle à votre site internet à Marseille : modernisation graphique, passage sur Next.js, optimisation mobile et SEO local. Devis gratuit sous 24h.",
+    "Refonte de site internet à Marseille : design moderne, Next.js, optimisation mobile et SEO local pour être mieux classé. Devis gratuit sous 24h.",
   alternates: { canonical: "https://www.wacimammouche.fr/refonte-site-internet-marseille" },
   openGraph: {
-    title: "Refonte de Site Web à Marseille | Design Moderne & Vitesse Supérieure",
+    title: "Refonte de site internet à Marseille | Design & SEO local",
     description:
-      "Votre site est lent, vieillissant ou mal positionné sur Google ? Découvrez comment une refonte technique et esthétique booste vos conversions.",
+      "Refonte de site internet à Marseille : design moderne, Next.js, optimisation mobile et SEO local pour être mieux classé. Devis gratuit sous 24h.",
     type: "website",
     locale: "fr_FR",
     url: "https://www.wacimammouche.fr/refonte-site-internet-marseille",
@@ -40,9 +42,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Refonte de Site Internet à Marseille | Wacim Ammouche",
+    title: "Refonte de site internet à Marseille | Design & SEO local",
     description:
-      "Modernisez votre site web. Vitesse maximale, design contemporain et référencement naturel pérenne.",
+      "Refonte de site internet à Marseille : design moderne, Next.js, optimisation mobile et SEO local pour être mieux classé. Devis gratuit sous 24h.",
     images: [DEFAULT_OG_IMAGE.url],
   },
 }

@@ -20,14 +20,16 @@ import { Button } from "@/components/ui/button"
 import { DEFAULT_OG_IMAGE } from "@/lib/seo"
 
 export const metadata: Metadata = {
-  title: "Commande & Réservation en Ligne Directe | Restaurants & Entreprises",
+  title: {
+    absolute: "Commande en ligne & réservation à Marseille | 0 commission",
+  },
   description:
-    "Solution de commande en ligne et réservation directe sur le site pour restaurants et toutes entreprises. Zéro commission, Click & Collect et réservations 24h/24. Devis gratuit.",
+    "Commande en ligne et réservation directe sur votre site, pour restaurants et entreprises à Marseille. Zéro commission. Devis gratuit sous 24h.",
   alternates: { canonical: "https://www.wacimammouche.fr/commande-en-ligne-reservation" },
   openGraph: {
-    title: "Commande & Réservation en Ligne Directe | Solution Sans Commission",
+    title: "Commande en ligne & réservation à Marseille | 0 commission",
     description:
-      "Installez votre propre système de commande en ligne et de réservation directe sur votre site. Pour restaurants et toutes entreprises. Paiement sécurisé et zéro intermédiaire.",
+      "Commande en ligne et réservation directe sur votre site, pour restaurants et entreprises à Marseille. Zéro commission. Devis gratuit sous 24h.",
     type: "website",
     locale: "fr_FR",
     url: "https://www.wacimammouche.fr/commande-en-ligne-reservation",
@@ -42,9 +44,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Commande & Réservation en Ligne Directe pour Entreprises",
+    title: "Commande en ligne & réservation à Marseille | 0 commission",
     description:
-      "Système de commande Click & Collect et réservation directe sur le site pour restaurants et toutes entreprises. Devis gratuit sous 24h.",
+      "Commande en ligne et réservation directe sur votre site, pour restaurants et entreprises à Marseille. Zéro commission. Devis gratuit sous 24h.",
     images: [DEFAULT_OG_IMAGE.url],
   },
 }
