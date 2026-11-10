@@ -3,8 +3,8 @@ import { Resend } from "resend"
 import { rateLimit, getClientIp } from "@/lib/rate-limit"
 import { verifyTurnstile } from "@/lib/turnstile"
 
-// 3 envois max par heure et par IP
-const RATE_LIMIT = 3
+// 10 envois max par heure et par IP
+const RATE_LIMIT = 10
 const RATE_WINDOW_SECONDS = 60 * 60
 // Un humain met plus de 3 secondes à remplir le formulaire
 const MIN_FILL_TIME_MS = 3000
