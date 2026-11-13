@@ -43,7 +43,7 @@ export const plans: Plan[] = [
     features: [
       "Instagram et TikTok",
       "1 publication par semaine, soit environ 4 par mois",
-      "Stories régulières",
+      "2 stories par semaine",
       "Création de visuels",
       "Stratégie de communication",
     ],
@@ -52,15 +52,13 @@ export const plans: Plan[] = [
   {
     id: "standard",
     name: "Formule Standard",
-    price: "350 €",
+    price: "450 €",
     tagline: "Pour les entreprises qui souhaitent développer davantage leur visibilité.",
     features: [
       "Instagram et TikTok",
       "3 publications par semaine, soit environ 12 par mois",
-      "Stories régulières",
-      "1 séance photo/vidéo par mois",
+      "3 stories par semaine",
       "Création de visuels",
-      "Gestion des commentaires et des messages",
       "Stratégie de communication",
       "Rapport mensuel",
     ],
@@ -70,13 +68,12 @@ export const plans: Plan[] = [
   {
     id: "premium",
     name: "Formule Premium",
-    price: "500 €",
+    price: "750 €",
     tagline: "Pour les entreprises qui souhaitent une communication plus soutenue.",
     features: [
       "Instagram et TikTok",
       "4 à 5 publications par semaine, soit environ 16 à 20 par mois",
-      "Stories régulières",
-      "Photos et vidéos avec 2 séances par mois",
+      "4 stories par semaine",
       "Création complète des contenus",
       "Gestion des commentaires et des messages",
       "Stratégie de communication",
@@ -118,11 +115,11 @@ export const sectors: { icon: LucideIcon; label: string }[] = [
 export const faqs: { q: string; a: string }[] = [
   {
     q: "Quelle formule choisir pour mon entreprise ?",
-    a: "L'Essentielle convient pour commencer à communiquer régulièrement. La Standard permet de développer davantage votre visibilité, avec une séance photo/vidéo par mois et la gestion des messages. La Premium s'adresse aux entreprises qui souhaitent une communication plus soutenue. En cas de doute, demandez un devis gratuit : je vous orienterai selon vos objectifs.",
+    a: "L'Essentielle convient pour commencer à communiquer régulièrement. La Standard permet de développer davantage votre visibilité avec un rythme plus soutenu et un rapport mensuel. La Premium s'adresse aux entreprises qui souhaitent une communication complète incluant la gestion des commentaires et des messages. En cas de doute, demandez un devis gratuit : je vous orienterai selon vos objectifs.",
   },
   {
     q: "Dois-je fournir les photos et les vidéos ?",
-    a: "Cela dépend de la formule. Les formules Standard et Premium incluent des séances photo/vidéo (1 ou 2 par mois). Pour la formule Essentielle, les modalités concernant vos propres visuels sont précisées lors de l'échange.",
+    a: "Nous définissons ensemble les modalités concernant les visuels lors de notre premier échange, en fonction des besoins de votre activité et de la formule choisie.",
   },
   {
     q: "Puis-je modifier ma formule plus tard ?",

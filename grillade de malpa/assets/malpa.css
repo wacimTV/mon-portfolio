@@ -1,0 +1,173 @@
+/* La Grillade de Malpa — le tableau du comptoir.
+   Feutre noir rainuré (une rainure tous les 8px), lettres plastique blanches, cadre en bois.
+   La braise (#ff5a1f) est la seule couleur chaude : prix et action Réserver. Toute hauteur de ligne est un multiple de 8. */
+
+:root {
+  --felt: #141312;
+  --felt-rib: #0c0b0a;
+  --felt-lift: #1d1b19;
+  --letter: #efeae0;
+  --letter-dim: #a8a196;
+  --ember: #ff5a1f;
+  --ember-ink: #141312;
+  --wood: #ad8a5d;
+  --wood-dark: #5d452a;
+  --rib: 8px;
+  --frame: 16px;
+  --gutter: clamp(16px, 4vw, 64px);
+  --display: "Archivo Narrow", "Arial Narrow", sans-serif;
+  --text: "Archivo", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--wood-dark); color: var(--letter); accent-color: var(--ember); caret-color: var(--ember); -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 72px; }
+body { margin: 0; font: 400 16px/24px var(--text); }
+::selection { background: var(--ember); color: var(--ember-ink); }
+a, button, select, input, textarea { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+img { display: block; max-width: 100%; }
+:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
+
+.skip { position: absolute; left: 16px; top: -64px; z-index: 50; background: var(--ember); color: var(--ember-ink); padding: 8px 16px; font: 700 16px/24px var(--display); text-decoration: none; }
+.skip:focus { top: 16px; }
+
+/* ---------- le feutre : le fond de chaque tableau ---------- */
+.felt {
+  background-color: var(--felt);
+  background-image: repeating-linear-gradient(to bottom, var(--felt-lift) 0 1px, var(--felt) 1px calc(var(--rib) - 2px), var(--felt-rib) calc(var(--rib) - 2px) var(--rib));
+}
+.board { border: var(--frame) solid var(--wood); outline: 2px solid var(--wood-dark); outline-offset: calc(-1 * var(--frame) - 2px); }
+
+/* lettres du tableau */
+.l { font-family: var(--display); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--letter); margin: 0; }
+.l-xl { font-size: clamp(40px, 6.4vw, 96px); line-height: clamp(48px, 7.2vw, 104px); letter-spacing: .04em; }
+.l-lg { font-size: clamp(28px, 3.2vw, 48px); line-height: clamp(40px, 4vw, 56px); }
+.l-md { font-size: clamp(20px, 2vw, 28px); line-height: 40px; }
+.l-sm { font-size: 16px; line-height: 24px; letter-spacing: .14em; }
+.ember { color: var(--ember); }
+.dim { color: var(--letter-dim); }
+
+/* ---------- barre du haut : le rail en bois ---------- */
+.top { position: sticky; top: 0; z-index: 20; background: var(--wood); color: var(--felt); border-bottom: 2px solid var(--wood-dark); }
+.top__in { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 0 var(--gutter); height: 64px; }
+.top__name { font: 700 18px/24px var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--felt); text-decoration: none; }
+.top__nav { display: flex; gap: 32px; }
+.top__nav a { font: 600 15px/24px var(--display); letter-spacing: .16em; text-transform: uppercase; color: var(--felt); text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 0 2px no-repeat; transition: background-size .25s cubic-bezier(.2,.8,.2,1); }
+.top__nav a:hover { background-size: 100% 2px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 24px; border: 0; border-radius: 0; background: var(--ember); color: var(--ember-ink); font: 700 16px/24px var(--display); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: transform .12s ease-out, background-color .2s ease-out; }
+.btn:hover { background: #ff6d36; }
+.btn:active { transform: translateY(2px); }
+.btn--line { background: transparent; color: var(--letter); box-shadow: inset 0 0 0 2px var(--letter); }
+.btn--line:hover { background: var(--letter); color: var(--felt); }
+.top .btn { min-height: 40px; padding: 0 16px; font-size: 14px; }
+@media (max-width: 860px) { .top__nav { display: none; } }
+
+/* ---------- le tableau d'accueil ---------- */
+.wall { padding: 24px var(--gutter) 32px; background: var(--wood-dark); }
+.hero { padding: 0; }
+.hero__board { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); min-height: calc(100svh - 64px - 24px - 2 * var(--frame)); }
+.hero__text { display: flex; flex-direction: column; padding: 40px clamp(24px, 4vw, 64px) 0; }
+.hero__sub { margin-top: 16px; }
+.hero__prices { margin: 40px 0 0; padding: 0; list-style: none; max-width: 640px; }
+.hero__prices li { display: flex; justify-content: space-between; gap: 24px; }
+.hero__photo { position: relative; margin: 0; border-left: var(--frame) solid var(--wood); overflow: hidden; }
+.hero__photo img { width: 100%; height: 100%; object-fit: cover; }
+
+/* le rail de réservation en bas du tableau */
+.rail { margin-top: auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) auto; gap: 8px; padding: 40px 0; align-items: end; }
+.slot { display: grid; gap: 8px; }
+.slot span { font: 600 13px/16px var(--display); letter-spacing: .18em; text-transform: uppercase; color: var(--letter-dim); }
+.slot select, .field input, .field select, .field textarea {
+  width: 100%; min-height: 48px; padding: 0 16px; border: 2px solid var(--letter); border-radius: 0; background: var(--felt); color: var(--letter);
+  font: 700 18px/24px var(--display); letter-spacing: .1em; text-transform: uppercase; appearance: none;
+}
+.slot select, .field select { background: var(--felt) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%23efeae0' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 16px center; padding-right: 40px; cursor: pointer; }
+.slot select option, .field select option { text-transform: none; }
+.rail .btn { min-height: 48px; }
+
+/* entrée : les lignes sont posées une à une sur le tableau */
+@media (prefers-reduced-motion: no-preference) {
+  .js .hero .l, .js .hero .rail { animation: pose .5s cubic-bezier(.2,.9,.25,1) both; animation-delay: calc(var(--i, 0) * 90ms + 120ms); }
+  .js .hero__photo img { animation: braise 1.2s ease-out both; }
+}
+@keyframes pose { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+@keyframes braise { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: none; } }
+
+/* ---------- sections : un tableau chacune, posées sur le bois ---------- */
+.sec { padding: 0; }
+/* une section n'est pas un nouveau tableau : on continue sur le même feutre, séparé par de l'air et une ligne de lettres pâles */
+.sec__board { border-top: 2px solid var(--felt-lift); }
+.sec__board { padding: 96px clamp(24px, 4vw, 64px) 96px; }
+.sec__head { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; flex-wrap: wrap; margin-bottom: 40px; }
+
+/* la carte */
+.menu { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(32px, 5vw, 96px); }
+.menu__group h3 { margin: 0 0 16px; }
+.menu ul { list-style: none; margin: 0; padding: 0; }
+.menu li { display: grid; grid-template-columns: 1fr auto; column-gap: 24px; padding-bottom: 16px; }
+.menu li .l-sm { grid-column: 1 / -1; }
+.menu .price { font-variant-numeric: tabular-nums; }
+
+/* la braise : les photos posées sur le feutre, bord à bord */
+.photos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--rib); margin-top: 40px; }
+.photos figure { margin: 0; aspect-ratio: 4 / 5; overflow: hidden; }
+.photos img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+.photos figure:hover img { transform: scale(1.03); }
+.lead { max-width: 720px; margin: 16px 0 0; font: 400 20px/32px var(--text); color: var(--letter); }
+
+/* adresse et horaires */
+.visit { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 96px); align-items: start; }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 0 32px; margin: 16px 0 0; }
+.hours dt, .hours dd { margin: 0; }
+.hours dd { text-align: right; font-variant-numeric: tabular-nums; }
+.lnk { color: var(--letter); text-decoration: none; background: linear-gradient(var(--ember), var(--ember)) 0 100% / 100% 2px no-repeat; padding-bottom: 2px; transition: color .2s; }
+.lnk:hover { color: var(--ember); }
+.visit__photo { margin: 0; aspect-ratio: 4 / 3; overflow: hidden; }
+.visit__photo img { width: 100%; height: 100%; object-fit: cover; }
+
+/* formulaires */
+.book { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 96px); align-items: start; }
+.form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 16px; }
+.field { display: grid; gap: 8px; }
+.field label { font: 600 13px/16px var(--display); letter-spacing: .18em; text-transform: uppercase; color: var(--letter-dim); }
+.field--full, .form .btn-row, .form__status, .form__note { grid-column: 1 / -1; }
+.field textarea { min-height: 144px; padding: 12px 16px; resize: vertical; text-transform: none; font: 400 16px/24px var(--text); letter-spacing: 0; }
+.field input[type="email"], .field input[type="tel"], .field input[name="name"] { text-transform: none; font: 500 17px/24px var(--text); letter-spacing: 0; }
+.field input[aria-invalid="true"], .field select[aria-invalid="true"], .field textarea[aria-invalid="true"] { border-color: var(--ember); }
+.field__error { margin: 0; font: 500 14px/24px var(--text); color: var(--ember); }
+.field__error[hidden] { display: none; }
+.form__status { margin: 0; min-height: 24px; font: 700 18px/24px var(--display); letter-spacing: .08em; text-transform: uppercase; }
+.form__note { margin: 0; color: var(--letter-dim); font-size: 14px; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.book__photo { margin: 24px 0 0; aspect-ratio: 16 / 10; overflow: hidden; }
+.book__photo img { width: 100%; height: 100%; object-fit: cover; }
+
+/* pied de page : le rail en bois du bas */
+.foot { background: var(--wood); color: var(--felt); padding: 24px var(--gutter) calc(24px + env(safe-area-inset-bottom)); }
+.foot__in { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font: 600 14px/24px var(--display); letter-spacing: .14em; text-transform: uppercase; }
+.foot a { color: var(--felt); }
+
+/* barre de réservation sur téléphone */
+.bar { display: none; }
+
+@media (max-width: 860px) {
+  :root { --frame: 10px; }
+  .wall { padding: 8px 8px 16px; }
+  .hero__board { grid-template-columns: 1fr; min-height: 0; }
+  .hero__text { padding: 32px 20px 0; }
+  .hero__prices { margin-top: 24px; }
+  .hero__prices li { font-size: 22px; line-height: 32px; letter-spacing: .06em; }
+  .hero__prices li span:last-child, .menu .price, .hours dd { white-space: nowrap; }
+  .hours { gap: 0 16px; font-size: 18px; line-height: 32px; }
+  .hero__photo { border-left: 0; border-top: var(--frame) solid var(--wood); height: 240px; order: 2; }
+  .rail { grid-template-columns: 1fr 1fr; padding: 24px 0 32px; }
+  .rail .slot:first-child { grid-column: 1 / -1; }
+  .rail .btn { grid-column: 1 / -1; }
+  .sec__board { padding: 56px 20px 64px; }
+  .menu, .visit, .book, .form { grid-template-columns: 1fr; }
+  .menu__group + .menu__group { margin-top: 40px; }
+  .photos { grid-template-columns: 1fr 1fr; }
+  .bar { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); background: var(--wood); transform: translateY(110%); transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+  .bar.is-on { transform: none; }
+  .bar .btn { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }

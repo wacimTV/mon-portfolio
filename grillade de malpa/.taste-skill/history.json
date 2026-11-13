@@ -1,0 +1,48 @@
+{
+ "palettes": [
+  "green-mat-chocolate"
+ ],
+ "types": [
+  "besley"
+ ],
+ "dealt": [
+  "besley",
+  "work-sans",
+  "outfit"
+ ],
+ "moments": [
+  {
+   "id": "photo-chapters",
+   "at": "2026-11-11T11:50:54.151Z",
+   "seed": "55ccdfe8"
+  },
+  {
+   "id": "picture-develops",
+   "at": "2026-11-11T11:59:36.731Z",
+   "seed": "1a73918a"
+  }
+ ],
+ "photos": [
+  {
+   "trade": "food",
+   "draft": true,
+   "lead": "m61663250",
+   "ids": [
+    "m61663250",
+    "m61757972"
+   ],
+   "sections": [
+    "hero",
+    "grill",
+    "grill",
+    "meat",
+    "meat",
+    "fire",
+    "fire",
+    "table"
+   ],
+   "seed": "nvqogi",
+   "at": "2026-11-11T11:50:59.880Z"
+  }
+ ]
+}

@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+@theme {
+  --color-coal-950: #0c0a08;
+  --color-coal-900: #13100d;
+  --color-coal-850: #1a1511;
+  --color-coal-800: #221b16;
+  --color-coal-700: #31271f;
+  --color-coal-600: #4a3b2f;
+  --color-cream: #f7efe4;
+  --color-muted: #c4b5a4;
+  --color-amber-400: #ffb84d;
+  --color-amber-500: #f59e1b;
+  --color-amber-600: #d98208;
+  --color-ember-500: #e4572e;
+  --color-ember-600: #c4401b;
+  --color-ember-700: #9e3113;
+  --color-uber: #06c167;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-oswald), Impact, "Arial Narrow", sans-serif;
+
+  --animate-flicker: flicker 3.2s ease-in-out infinite;
+  --animate-rise: rise 9s linear infinite;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  45% { opacity: 1; transform: scale(1.04); }
+  70% { opacity: 0.75; transform: scale(0.98); }
+}
+
+@keyframes rise {
+  0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translate3d(var(--drift, 20px), -85vh, 0) scale(0.3); opacity: 0; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-coal-950 text-cream font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  :focus-visible {
+    outline: 3px solid var(--color-amber-400);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  ::selection { background: var(--color-amber-500); color: var(--color-coal-950); }
+}
+
+@layer components {
+  .container-x { @apply mx-auto w-full max-w-6xl px-5 sm:px-8; }
+
+  .btn, .btn-primary, .btn-ember, .btn-ghost, .btn-uber {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-3 text-base font-semibold transition duration-200 select-none;
+  }
+  .btn:active, .btn-primary:active, .btn-ember:active, .btn-ghost:active, .btn-uber:active { transform: translateY(1px) scale(0.99); }
+  .btn-primary { @apply bg-amber-500 text-coal-950 shadow-[0_8px_30px_-8px_rgba(245,158,27,0.6)] hover:bg-amber-400; }
+  .btn-ember { @apply bg-ember-600 text-white hover:bg-ember-500; }
+  .btn-ghost { @apply border border-cream/30 text-cream hover:border-amber-400 hover:text-amber-400; }
+  .btn-uber { @apply bg-[#0f0f0f] text-white ring-1 ring-uber/60 hover:ring-uber; }
+
+  .eyebrow { @apply text-sm font-semibold tracking-[0.2em] text-amber-400 uppercase; }
+  .h2 { @apply font-display text-4xl leading-[1.05] font-bold uppercase sm:text-5xl; }
+  .lead { @apply text-lg leading-relaxed text-muted; }
+  .card { @apply rounded-2xl border border-coal-700 bg-coal-900; }
+
+  .field { @apply flex flex-col gap-1.5; }
+  .label { @apply text-sm font-medium text-cream; }
+  .input {
+    @apply min-h-12 w-full rounded-xl border border-coal-600 bg-coal-850 px-4 py-3 text-base text-cream placeholder:text-muted/70 transition;
+  }
+  .input:focus { @apply border-amber-400 outline-none ring-2 ring-amber-400/40; }
+  .input[aria-invalid="true"] { @apply border-ember-500; }
+
+  .grain {
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% 110%, rgba(228, 87, 46, 0.35), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 0%, rgba(245, 158, 27, 0.12), transparent 60%);
+  }
+
+  .placeholder-photo {
+    background:
+      repeating-linear-gradient(135deg, rgba(255, 184, 77, 0.06) 0 12px, transparent 12px 24px),
+      linear-gradient(160deg, var(--color-coal-800), var(--color-coal-900));
+  }
+}
+
+/* Apparition au scroll — 100 % CSS, sans JavaScript (amélioration progressive) */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: fade-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

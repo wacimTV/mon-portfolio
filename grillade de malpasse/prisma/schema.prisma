@@ -1,0 +1,193 @@
+// Schéma de données — La Grillade de Malpa
+// SQLite par défaut. Pour Postgres : provider = "postgresql" + adapter @prisma/adapter-pg (voir README).
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+/// Réglages généraux du restaurant (une seule ligne, id = 1)
+model Setting {
+  id                  Int     @id @default(1)
+  name                String  @default("La Grillade de Malpa")
+  phone               String  @default("09 84 37 95 25")
+  whatsapp            String  @default("") // numéro international sans +, ex. 33612345678 (vide = masqué)
+  email               String  @default("") // email affiché publiquement (optionnel)
+  street              String  @default("1 Avenue de Valdonne")
+  postalCode          String  @default("13013")
+  city                String  @default("Marseille")
+  latitude            Float   @default(43.3318)
+  longitude           Float   @default(5.4135)
+  uberRating          Float   @default(4.4)
+  uberReviewCount     String  @default("300+")
+  deliveryZones       String  @default("Marseille 13e, Marseille 14e, Marseille 12e")
+  slotCapacity        Int     @default(20) // nombre de couverts max par créneau de 30 min
+  maxGuestsOnline     Int     @default(20) // taille de groupe max réservable en ligne
+  announcement        String  @default("") // bandeau promo (vide = masqué)
+  parkingInfo         String  @default("Stationnement possible dans les rues alentour. Le métro Malpassé (ligne M1) est à proximité.")
+  transportInfo       String  @default("") // ex. lignes de bus RTM (vide par défaut si non vérifié)
+  meatOriginNote      String  @default("") // mention générale origine des viandes affichée en bas de carte
+  clickAndCollectEnabled Boolean @default(true) // activer / désactiver le click & collect
+  googleMapsUrl       String  @default("")
+  googleReviewUrl     String  @default("")
+  tiktok              String  @default("https://www.tiktok.com/@grillade.de.malpa")
+  instagram           String  @default("")
+  facebook            String  @default("")
+  snapchat            String  @default("")
+  heroImage           String  @default("")
+  storyImage          String  @default("")
+  updatedAt           DateTime @updatedAt
+}
+
+/// Plateformes de livraison (Uber Eats, Deliveroo…)
+model DeliveryPlatform {
+  id     Int     @id @default(autoincrement())
+  name   String
+  url    String
+  active Boolean @default(true)
+  sort   Int     @default(0)
+}
+
+/// Horaires hebdomadaires (dayOfWeek : 0 = dimanche … 6 = samedi)
+model OpeningHour {
+  dayOfWeek Int     @id
+  openTime  String  @default("11:00")
+  closeTime String  @default("01:00") // si < openTime : fermeture après minuit
+  closed    Boolean @default(false)
+}
+
+/// Fermetures exceptionnelles (date de service AAAA-MM-JJ)
+model Closure {
+  id     Int    @id @default(autoincrement())
+  date   String @unique
+  reason String @default("")
+}
+
+model Category {
+  id          Int        @id @default(autoincrement())
+  name        String
+  slug        String     @unique
+  description String     @default("")
+  sort        Int        @default(0)
+  items       MenuItem[]
+}
+
+model MenuItem {
+  id          Int      @id @default(autoincrement())
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  name        String
+  description String   @default("")
+  priceCents  Int
+  image       String   @default("")
+  featured    Boolean  @default(false)
+  promoLabel  String   @default("")
+  meatOrigin  String   @default("") // ex. "Bœuf : France · Volaille : UE"
+  allergens   String   @default("") // liste séparée par virgules parmi les 14 allergènes réglementaires
+  available   Boolean  @default(true)
+  sort        Int      @default(0)
+
+  @@index([categoryId])
+}
+
+/// Formules et promotions (affichées sur l'accueil et en haut de /carte si actives)
+model Offer {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String   @default("")
+  priceCents  Int?     // optionnel
+  badge       String   @default("") // ex. "Étudiant", "Midi", "Famille"
+  active      Boolean  @default(true)
+  sort        Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+/// Commandes Click & Collect (retrait sur place, paiement au comptoir)
+model Order {
+  id         Int         @id @default(autoincrement())
+  name       String
+  phone      String
+  email      String      @default("")
+  pickupDate String      // AAAA-MM-JJ (date de service)
+  pickupTime String      // HH:MM
+  note       String      @default("")
+  totalCents Int
+  status     String      @default("NEW") // NEW | PREPARING | READY | COMPLETED | CANCELLED
+  createdAt  DateTime    @default(now())
+  items      OrderItem[]
+
+  @@index([pickupDate, status])
+  @@index([createdAt])
+}
+
+model OrderItem {
+  id             Int    @id @default(autoincrement())
+  orderId        Int
+  order          Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  menuItemId     Int?
+  name           String // nom figé au moment de la commande
+  unitPriceCents Int    // prix unitaire figé au moment de la commande
+  quantity       Int
+
+  @@index([orderId])
+}
+
+model GalleryImage {
+  id        Int      @id @default(autoincrement())
+  src       String
+  alt       String
+  sort      Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+/// Avis réels recopiés par le restaurant (Google, etc.) — jamais d'avis inventés
+model Review {
+  id        Int      @id @default(autoincrement())
+  author    String
+  rating    Int
+  text      String
+  source    String   @default("Google")
+  date      String   @default("")
+  visible   Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model Reservation {
+  id        Int      @id @default(autoincrement())
+  name      String
+  phone     String
+  email     String
+  date      String // date de service AAAA-MM-JJ
+  time      String // HH:MM (00:00 et 00:30 = nuit suivante)
+  guests    Int
+  message   String   @default("")
+  status    String   @default("PENDING") // PENDING | CONFIRMED | CANCELLED
+  createdAt DateTime @default(now())
+
+  @@index([date, time])
+  @@index([status])
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String   @default("")
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+/// Journal anti-abus (connexion admin, formulaires) — IP hachée
+model RateEvent {
+  id        Int      @id @default(autoincrement())
+  key       String
+  createdAt DateTime @default(now())
+
+  @@index([key, createdAt])
+}
+

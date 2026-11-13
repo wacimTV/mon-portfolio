@@ -1,0 +1,23 @@
+{
+  "world": "Le tableau du comptoir",
+  "seed": "seed:3b9c6349d1a12b36",
+  "colors": {
+    "felt": "#141312",
+    "felt-rib": "#0c0b0a",
+    "felt-lift": "#1d1b19",
+    "letter": "#efeae0",
+    "letter-dim": "#a8a196",
+    "ember": "#ff5a1f",
+    "ember-ink": "#141312",
+    "wood": "#ad8a5d",
+    "wood-dark": "#5d452a"
+  },
+  "spacing": { "rib": "8px", "frame": "16px", "frame-mobile": "10px" },
+  "type": {
+    "letters": { "family": "Archivo Narrow", "weight": 700, "case": "uppercase", "tracking": "0.08em" },
+    "text": { "family": "Archivo", "weight": 400 }
+  },
+  "radius": "0",
+  "shadows": "none",
+  "motion": { "entrance": "lines posed one by one, 90ms stagger, 500ms, cubic-bezier(.2,.9,.25,1)", "reducedMotion": "none" }
+}

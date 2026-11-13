@@ -10,8 +10,8 @@ export type FormulaChoice = PlanId | "a-definir"
 
 const formulaLabel: Record<FormulaChoice, string> = {
   essentielle: "Formule Essentielle – 250 € / mois TTC",
-  standard: "Formule Standard – 350 € / mois TTC",
-  premium: "Formule Premium – 500 € / mois TTC",
+  standard: "Formule Standard – 450 € / mois TTC",
+  premium: "Formule Premium – 750 € / mois TTC",
   "a-definir": "Je ne sais pas encore (à définir ensemble)",
 }
 

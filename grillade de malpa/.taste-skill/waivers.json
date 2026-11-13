@@ -1,0 +1,1 @@
+[{"check":"hero-lines","target":"section.hero h1","reason":"Le h1 final fait 31 caractères et tient sur une ligne à 1440 ; le test remplit à 48 caractères."}]
